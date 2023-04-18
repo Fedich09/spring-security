@@ -1,10 +1,10 @@
-package com.security.springsecurity;
+package com.easy.bank;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringSecurityApplicationTests {
+class EasyBankBackendApplicationTests {
 
 	@Test
 	void contextLoads() {

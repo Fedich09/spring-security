@@ -1,13 +1,13 @@
-package com.security.springsecurity;
+package com.easy.bank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSecurityApplication {
+public class EasyBankBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringSecurityApplication.class, args);
+		SpringApplication.run(EasyBankBackendApplication.class, args);
 	}
 
 }
