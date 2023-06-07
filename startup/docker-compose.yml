@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql:8.0.26
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: easy-bank
+    ports:
+      - "3306:3306"
