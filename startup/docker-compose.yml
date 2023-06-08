@@ -1,10 +1,12 @@
-version: "3.9"
+version: '3.5'
+
 services:
-  db :
-    image: mysql
+  db:
+    image: mysql:8.0.26
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: easy-bank
     ports:
-      - "8001:3306"
-  backend :
-    build: https://github.com/Fedich09/spring-security.git
-    ports:
-      - "8000:8080"
+      - "3306:3306"
