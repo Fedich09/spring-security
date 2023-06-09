@@ -15,7 +15,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "customer_id")
-    private int id;
+    private Long id;
 
     private String name;
 
