@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.UnknownServiceException;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +19,7 @@ public class CustomerService {
     @Transactional
     public Long register(Customer customer) throws Exception {
         customer.setPwd(encoder.encode(customer.getPwd()));
+        customer.setCreateDt(String.valueOf(LocalDate.now()));
         Customer saved = customerRepository.save(customer);
         if (saved.getId() == null) {
             throw new Exception(String
