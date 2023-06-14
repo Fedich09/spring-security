@@ -4,9 +4,9 @@ import com.easy.bank.model.Customer;
 import com.easy.bank.repository.CustomerRepository;
 import com.easy.bank.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +28,6 @@ public class LoginController {
 
     @RequestMapping("/user")
     public Customer getUserDetailsAfterLogin(Authentication authentication) {
-        return customerRepository.findByEmail(authentication.name());
+        return customerRepository.findByEmail(authentication.getName());
     }
 }
