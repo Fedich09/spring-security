@@ -12,8 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-
 @Component
 @RequiredArgsConstructor
 public class EasyBankPwdAuthenticationProvider implements AuthenticationProvider {
@@ -28,7 +26,9 @@ public class EasyBankPwdAuthenticationProvider implements AuthenticationProvider
             if (passwordEncoder.matches(authentication.getCredentials().toString(), customer.getPwd())) {
                 return new UsernamePasswordAuthenticationToken(authentication.getName(),
                         authentication.getCredentials().toString(),
-                        Collections.singleton(new SimpleGrantedAuthority(customer.getRole())));
+                        customer.getAuthorities().stream()
+                                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                                .toList());
             } else {
                 throw new BadCredentialsException("Invalid password.");
             }
