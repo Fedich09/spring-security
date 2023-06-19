@@ -1,6 +1,9 @@
 package com.easy.bank.config;
 
+import com.easy.bank.filter.AuthoritiesAfterLoginFilter;
+import com.easy.bank.filter.AuthoritiesAtLoggingFilter;
 import com.easy.bank.filter.CsrfCookieFilter;
+import com.easy.bank.filter.RequestValidationBeforeFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -37,6 +40,9 @@ public class ProjectSecurityConfig {
                 })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/register")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesAtLoggingFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthoritiesAfterLoginFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount").hasRole("USER")
                         .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
